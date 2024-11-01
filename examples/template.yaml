@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
-Description: Sample Lambda function using the sharp-heic lambda layer
+Description: Sample Lambda function using the sharp-jp2 lambda layer
 
 Resources:
   SharpTestFunction:
@@ -12,4 +12,4 @@ Resources:
       Timeout: 10
       MemorySize: 1024
       Layers:
-        - !ImportValue SharpHEICLayerArn
+        - !ImportValue SharpJP2LayerArn

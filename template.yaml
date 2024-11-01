@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
-Description: Lambda Layer providing sharp with HEIC support
+Description: Lambda Layer providing sharp with JP2 support
 
 Parameters:
   OrganizationId:
@@ -12,7 +12,7 @@ Parameters:
     Description: An account ID, or * to grant permission to use the layer to all AWS accounts.
     Type: String
   LayerName:
-    Default: sharp-heic
+    Default: sharp-jp2
     Description: The name of the Lambda Layer that will be created.
     Type: String
 
@@ -21,11 +21,11 @@ Conditions:
   UseDefaultPrincipal: !Equals [ !Ref Principal, account ]
 
 Resources:
-  SharpHEICLayer:
+  SharpJP2Layer:
     Type: AWS::Serverless::LayerVersion
     Properties:
       LayerName: !Ref LayerName
-      Description: Sharp Layer with HEIC Support
+      Description: Sharp Layer with JP2 Support
       ContentUri: ./layer/
       CompatibleRuntimes:
         - nodejs20.x
@@ -34,11 +34,11 @@ Resources:
     Metadata:
       BuildMethod: makefile
 
-  SharpHEICLayerPermission:
+  SharpJP2LayerPermission:
     Type: AWS::Lambda::LayerVersionPermission
     Properties:
       Action: lambda:GetLayerVersion
-      LayerVersionArn: !Ref SharpHEICLayer
+      LayerVersionArn: !Ref SharpJP2Layer
       Principal:
         Fn::If:
           - UseDefaultPrincipal
@@ -51,8 +51,8 @@ Resources:
           - !Ref OrganizationId
 
 Outputs:
-  SharpHEICLayerArn:
-    Value: !Ref SharpHEICLayer
-    Description: ARN of the Sharp HEIC Lambda Layer
+  SharpJP2LayerArn:
+    Value: !Ref SharpJP2Layer
+    Description: ARN of the Sharp JP2 Lambda Layer
     Export:
-      Name: SharpHEICLayerArn
+      Name: SharpJP2LayerArn

@@ -1,12 +1,15 @@
 {
-  "name": "sharp-heic-sample",
-  "version": "2.0.2",
+  "name": "sharp-jp2-sample",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Andreas Zoellner",
+  "author": "Michael B. Klein",
+  "contributors": [
+    "Andreas Zoellner (Original Author)"
+  ],
   "license": "MIT",
   "engines": {
     "node": ">=20.0"
