@@ -47,7 +47,7 @@ The special value `account` for `PRINCIPAL` is used to give access to the accoun
 The environment variables are used to create a `samconfig.toml` file that configures the `sam package` and `sam deploy` commands.
 
 ### Note regarding build process
-Previously, some custom docker images were needed to build this layer. AWS has since published newer images which work out of the box. `saml-cli` version `v1.33.0` is using `public.ecr.aws/sam/build-nodejs14.x:latest-x86_64`
+Previously, some custom docker images were needed to build this layer. AWS has since published newer images which work out of the box. `saml-cli` version `v1.33.0` is using `public.ecr.aws/sam/build-nodejs20.x:latest-x86_64`
 
 ## Background
 This repo exists as it is rather painful to compile all libraries required to get sharp to work with JP2 files in an AWS Lambda environment. The sharp repository has several [issues](https://github.com/lovell/sharp/issues) related to this.
@@ -56,10 +56,8 @@ This repo exists as it is rather painful to compile all libraries required to ge
 This lambda layer contains the node module [sharp](https://github.com/lovell/sharp). But unlike a normal installation via `npm i sharp` this layer does not use the prebuilt sharp and libvips binaries. This layer compiles libwebp, libde265, libheif, libvips, and sharp from source in order to provide JP2 (and webp) functionality in an AWS Lambda environment.
 
 ### CompatibleRuntimes
-- `nodejs12.x` (v1.x)
-- `nodejs14.x` (v2.x)
-- `nodejs16.x` (v3.x)
-- `nodejs20.x` (v4.x)
+- `nodejs18.x`
+- `nodejs20.x`
 
 ## Contributions
 If you would like to contribute to this repository, please open an issue or submit a PR.
