@@ -28,6 +28,7 @@ Resources:
       Description: Sharp Layer with JP2 Support
       ContentUri: ./layer/
       CompatibleRuntimes:
+        - nodejs18.x
         - nodejs20.x
       LicenseInfo: 'MIT'
       RetentionPolicy: Retain
