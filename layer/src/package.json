@@ -9,11 +9,14 @@
     "Andreas Zoellner (Original Author)"
   ],
   "license": "MIT",
-  "devDependencies": {},
+  "devDependencies": {
+    "node-addon-api": "^8.2.1",
+    "node-gyp": "^10.2.0"
+  },
   "engines": {
     "node": ">=20.3"
   },
   "dependencies": {
-    "sharp": "^0.33.4"
+    "sharp": "github:mbklein/sharp#add-jp2-oneshot-support"
   }
 }

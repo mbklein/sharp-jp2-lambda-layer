@@ -20,8 +20,9 @@ build-SharpJP2Layer: libvips
 	# extract list with ldd from sharp.node, manipulate a bit to only get the absolute paths, then copy
 
 	# install
-	npm install --save --prefix "$(ARTIFACTS_DIR)/nodejs/" node-addon-api node-gyp
-	npm install --build-from-source --prefix "$(ARTIFACTS_DIR)/nodejs/" --verbose --foreground-scripts --platform=linux --arch=x64 sharp@$(SHARP_VERSION)
+	cp /tmp/samcli/source/src/package.json "$(ARTIFACTS_DIR)/nodejs/"
+	npm install --build-from-source --prefix "$(ARTIFACTS_DIR)/nodejs/" --verbose --foreground-scripts --platform=linux --arch=x64 
+	npm prune --prefix "$(ARTIFACTS_DIR)/nodejs/" --omit=dev
 
 	# debug logs
 	# ls -la $(ARTIFACTS_DIR)/nodejs/node_modules/sharp/src/build/*/
@@ -43,10 +44,10 @@ libopenjp2:
 	echo "cd openjpeg-$(LIBOPENJP2_VERSION) && mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=$(LIB_PATH) && make && make install"
 	cd openjpeg-$(LIBOPENJP2_VERSION) && mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=$(LIB_PATH) && make && make install
 
-libvips: installLib libwebp libopenjp2
+libvips: installLib
 	# libvips
 #	curl -L https://github.com/libvips/libvips/releases/download/v$(VIPS_VERSION)/vips-$(VIPS_VERSION).tar.xz | tar xJ
-	git clone https://github.com/mbklein/libvips.git --branch add-jp2kload-oneshot --single-branch vips
+	git clone https://github.com/libvips/libvips.git --branch add-jp2kload-oneshot --single-branch vips
 	cd vips && meson setup build --prefix ${PREFIX_PATH} --libdir ${LIB_PATH} -Dopenjpeg=enabled -Dwebp=enabled -Dlcms=enabled --buildtype release && cd build && meson compile && meson install
 
 installLib:
@@ -61,7 +62,9 @@ installLib:
 		libexif-devel \
 		librsvg2-devel \
 		libtiff-devel \
+		libwebp-devel \
 		lcms2-devel \
+		openjpeg2-devel \
 		gobject-introspection-devel \
 		cmake \
 		nasm \
